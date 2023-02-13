@@ -1,0 +1,142 @@
+{% extends 'includes/base.html' %}
+
+{% load static %}	
+    
+
+{% block content %}
+    
+    <div class="app-wrapper">
+	    
+	    <div class="app-content pt-3 p-md-3 p-lg-4">
+		    <div class="container-xl">
+			    <div class="row g-3 mb-4 align-items-center justify-content-between">
+				    <div class="col-auto">
+			            <h1 class="app-page-title mb-0">{{category.category_name}}</h1>
+				    </div>
+				    <div class="col-auto">
+					     <div class="page-utilities">
+						    <div class="row g-2 justify-content-start justify-content-md-end align-items-center">
+							    <div class="col-auto">
+								    <form class="docs-search-form row gx-1 align-items-center">
+					                    <div class="col-auto">
+					                        <input type="text" id="search-docs" name="searchdocs" class="form-control search-docs" placeholder="Search">
+					                    </div>
+					                    <div class="col-auto">
+					                        <button type="submit" class="btn app-btn-secondary">Search</button>
+					                    </div>
+					                </form>
+					                
+							    </div><!--//col-->
+							    <div class="col-auto">
+								    
+								    <select class="form-select w-auto">
+										  <option selected="" value="option-1">All</option>
+										  <option value="option-2">Text file</option>
+										  <option value="option-3">Image</option>
+										  <option value="option-4">Spreadsheet</option>
+										  <option value="option-5">Presentation</option>
+										  <option value="option-6">Zip file</option>
+										  
+									</select>
+							    </div>
+							    <div class="col-auto">
+								    <a class="btn app-btn-primary" href="#"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-upload me-2" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+  <path fill-rule="evenodd" d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+  <path fill-rule="evenodd" d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708l3-3z"/>
+</svg>Upload File</a>
+							    </div>
+						    </div><!--//row-->
+					    </div><!--//table-utilities-->
+				    </div><!--//col-auto-->
+			    </div><!--//row-->
+			    
+			    <div class="row g-4">
+				    
+					<!-- Product main img -->
+					<div class="col-md-5 col-md-push-2">
+						<div id="product-main-img">
+							<div class="product-preview">
+								<img src="{{ single_product.image.url }}" alt="">
+							</div>
+						</div>
+					</div>
+					<!-- /Product main img -->
+
+					<!-- Product thumb imgs -->
+					<div class="col-md-2  col-md-pull-5">
+						<div id="product-imgs">
+							<div class="product-preview">
+								<img src="{{ single_product.image.url }}" alt="">
+							</div>
+
+							<div class="product-preview">
+								<img src="{{ single_product.image.url }}" alt="">
+							</div>
+
+							
+						</div>
+					</div>
+					<!-- /Product thumb imgs -->
+
+                    <!-- Product details -->
+					<div class="col-md-5">
+						<div class="product-details">
+							<h2 class="product-name">{{ single_product.product_name }}</h2>
+							
+							<div>
+								<h3 class="product-price">{{ single_product.price }}₹ <del class="product-old-price">990₹</del></h3>
+								<span class="product-available">In Stock</span>
+							</div>
+							<p>{{ single_product.description }}</p>
+
+							<div class="product-options">
+								<label>
+									Size
+									<select class="input-select">
+										<option value="0">X</option>
+									</select>
+								</label>
+								<label>
+									Color
+									<select class="input-select">
+										<option value="0">Red</option>
+									</select>
+								</label>
+							</div>
+
+
+						</div>
+					</div>
+					<!-- /Product details -->
+                    
+				    
+			    </div><!--//row-->
+			    
+		    </div><!--//container-fluid-->
+	    </div><!--//app-content-->
+	    
+	    <footer class="app-footer">
+		    <div class="container text-center py-3">
+		         
+		       
+		    </div>
+	    </footer><!--//app-footer-->
+	    
+    </div><!--//app-wrapper-->    					
+
+ 
+    <!-- Javascript -->          
+    <script src="assets/plugins/popper.min.js"></script>
+    <script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>  
+
+    
+    <!-- Page Specific JS -->
+    <script src="assets/js/app.js"></script> 
+
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+
+</body>
+</html> 
+
+
+{% endblock %}

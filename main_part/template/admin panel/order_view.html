@@ -1,0 +1,214 @@
+{% extends 'includes/base.html' %}
+
+{% load static %}	
+    
+
+{% block content %}
+    
+    <div class="app-wrapper">
+	    
+	    <div class="app-content pt-3 p-md-3 p-lg-4">
+		    <div class="container-xl">
+			    
+			    <div class="row g-3 mb-4 align-items-center justify-content-between">
+				    <div class="col-auto">
+			            <h1 class="app-page-title mb-0">Orders</h1>
+				    </div>
+				    <div class="col-auto">
+					     <div class="page-utilities">
+						    <div class="row g-2 justify-content-start justify-content-md-end align-items-center">
+							    <div class="col-auto">
+								    <form class="table-search-form row gx-1 align-items-center">
+					                    <div class="col-auto">
+					                        <input type="text" id="search-orders" name="searchorders" class="form-control search-orders" placeholder="Search">
+					                    </div>
+					                    <div class="col-auto">
+					                        <button type="submit" class="btn app-btn-secondary">Search</button>
+					                    </div>
+					                </form>
+					                
+							    </div><!--//col-->
+							    <div class="col-auto">
+								    
+								    <select class="form-select w-auto" >
+										  <option selected value="option-1">All</option>
+										  <option value="option-2">This week</option>
+										  <option value="option-3">This month</option>
+										  <option value="option-4">Last 3 months</option>
+										  
+									</select>
+							    </div>
+							    
+						    </div><!--//row-->
+					    </div><!--//table-utilities-->
+				    </div><!--//col-auto-->
+			    </div><!--//row-->
+			   
+			    
+			    
+				
+				
+				<div class="tab-content" id="orders-table-tab-content">
+			        <div class="tab-pane fade show active" id="orders-all" role="tabpanel" aria-labelledby="orders-all-tab">
+					    <div class="app-card app-card-orders-table shadow-sm mb-5">
+						    <div class="app-card-body">
+							    <div class="table-responsive">
+							        <div class="row">
+                                        <div class="offset-xl-2 col-xl-8 col-lg-12 col-md-12 col-sm-12 col-12">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="card">
+                                                        
+                                                        <div class="card-body">
+                                                            <form class="needs-validation" novalidate="">
+                                                                <div class="row">
+                                                                    <div class="col-md-10">
+                                                                        <label for="firstName">Order Date</label>
+                                                                        <h4>{{single_order.created_at.date}}</h4>
+                                                                    </div>
+                                                                    <div class="col-md-2">
+                                                                        <label for="firstName">Order Total</label>
+                                                                        <h4>{{single_order.order_total}}₹</h4>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="col-md-6 mb-3">
+                                                                        <label for="firstName">Customer name</label>
+                                                                        <input type="text" class="form-control" id="firstName" placeholder="" value="{{single_order.user.username}}" disabled>
+                                                                        
+                                                                    </div>
+                                                                    <div class="col-md-6 mb-3">
+                                                                        <label for="lastName">Order ID</label>
+                                                                        <input type="text" class="form-control" id="lastName" placeholder="" value="{{single_order.order_number}}" disabled>
+                                                                        
+                                                                    </div>
+                                                                </div>
+                                                                
+                                                                <div class="row">
+                                                                    <div class="col-md-6 mb-3">
+                                                                        <label for="email">Email</label>
+                                                                        <input type="email" class="form-control" value="{{single_order.user.email}}" id="email" disabled>
+                                                                    </div>
+                                                                    <div class="col-md-6 mb-3">
+                                                                        <label for="email">Phone</label>
+                                                                        <input type="text" class="form-control" value="{{single_order.phone}}" id="email" disabled>
+                                                                    </div>
+                                                                </div>
+                                                                    
+
+                                                                <div class="mb-3">
+                                                                    <label for="address">Products</label>
+                                                                    <table class="table">
+                                                                        <thead>
+                                                                          <tr>
+                                                                            <th scope="col">Prod Img</th>
+                                                                            <th scope="col">Product Name</th>
+                                                                            <th scope="col">Quantity</th>
+                                                                            <th scope="col">Price</th>
+                                                                          </tr>
+                                                                        </thead>
+                                                                        <tbody>
+                                                                        {% for order_product in order_products %}
+                                                                          <tr>
+                                                                            <td><img style="width: 40px;" src="{{order_product.product.image.url}}" alt=""></td>
+                                                                            <td>{{order_product.product.product_name}}</td>
+                                                                            <td>{{order_product.quantity}}</td>
+                                                                            <td>{{order_product.product.price}}</td>
+                                                                          </tr>
+                                                                        {% endfor %}
+                                                                        </tbody>
+                                                                      </table>
+                                                                    
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="col-md-9 mb-3">
+                                                                        <label for="address2">Billing Address</label>
+                                                                        <input type="text" class="form-control" value="{{single_order.address_line}} {{single_order.city}}" id="address2" disabled>
+                                                                    </div>
+                                                                    <div class="col-md-3 mb-3">
+                                                                        <label for="zip">Zip</label>
+                                                                        <input type="text" class="form-control" id="zip" value="{{single_order.zipcode}}" disabled>
+                                                                        
+                                                                    </div>
+                                                                </div>
+                                                                
+                                                                <div class="row">
+                                                                    <div class="col-md-5 mb-3">
+                                                                        <label for="country">Status</label>
+                                                                        <select class="form-select form-select-md mb-3" aria-label=".form-select-lg example">
+                                                                            <option selected>Open this select menu</option>
+                                                                            <option value="1">New</option>
+                                                                            <option value="2">Accepted</option>
+                                                                            <option value="3">Completed</option>
+                                                                          </select>
+                                                                        
+                                                                    </div>
+                                                                    <div class="col-md-4 mb-3">
+                                                                        <label for="state">Deliver Status</label>
+                                                                        <select class="form-select form-select-md mb-3" aria-label=".form-select-lg example">
+                                                                            <option selected>Open this select menu</option>
+                                                                            <option value="1">Order recieved</option>
+                                                                            <option value="2">Pending</option>
+                                                                            <option value="3">Success</option>
+                                                                          </select>
+                                                                        
+                                                                    </div>                                                                   
+                                                                </div>
+                                                                <hr class="mb-4">
+                                                                <div class="custom-control custom-checkbox">
+                                                                    <input type="checkbox" class="custom-control-input" id="same-address">
+                                                                    <label class="custom-control-label" for="same-address">Shipping address is the same as my billing address</label>
+                                                                </div>
+                                                                
+                                                                <hr class="mb-4">
+                                                                
+                                                                <button class="btn" style="background-color: rgb(230, 34, 74); color: white;" type="submit">Update Order</button>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+						        </div><!--//table-responsive-->
+						       
+						    </div><!--//app-card-body-->		
+						</div><!--//app-card-->
+						
+						
+			        </div><!--//tab-pane-->
+			        
+			        
+			        
+			        
+			        
+				</div><!--//tab-content-->
+				
+				
+			    
+		    </div><!--//container-fluid-->
+	    </div><!--//app-content-->
+	    
+	    <footer class="app-footer">
+		    
+	    </footer><!--//app-footer-->
+	    
+    </div><!--//app-wrapper-->    					
+
+ 
+    <!-- Javascript -->          
+    <script src="assets/plugins/popper.min.js"></script>
+    <script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>  
+    
+    
+    <!-- Page Specific JS -->
+    <script src="assets/js/app.js"></script> 
+
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+
+</body>
+</html> 
+
+
+{% endblock %}
