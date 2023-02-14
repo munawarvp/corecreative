@@ -199,7 +199,7 @@ SOCIALACCOUNT_PROVIDERS = {
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'laserladgaming@gmail.com'
-EMAIL_HOST_PASSWORD = 'yalkrnahfrowtkuu'
+EMAIL_HOST_PASSWORD = 'hrgckxxuarbpxhzf'
 EMAIL_USE_TLS = True
 
 SOCIALACCOUNT_QUERY_EMAIL = True
