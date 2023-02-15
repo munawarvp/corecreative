@@ -200,13 +200,13 @@
 						{% for cart_item in wishlist_items %}
 		
 							<div class="cart-row">
-								<div style="flex: 2;"><img class="row-image" src="{{ cart_item.Product.image.url }}" alt=""></div>
-								<div style="flex: 2;"><h5>{{cart_item.Product.product_name}}</h5></div>
-								<div style="flex: 1;">{{cart_item.Product.price}}₹</div>
+								<div style="flex: 2;"><img class="row-image" src="{{ cart_item.product.image.url }}" alt=""></div>
+								<div style="flex: 2;"><h5>{{cart_item.product.product_name}}</h5></div>
+								<div style="flex: 1;">{{cart_item.product.price}}₹</div>
 								
 								
-								<div style="margin-right: 10px;"><a style=" background-color:#D10024; border-radius: 5px; color:white " class="btn" href="{% url 'addtocart' cart_item.Product.id %}">Add to cart</a></div>
-								<div style="flex: 1;"><a style=" background-color:#D10024; border-radius: 5px; color:white " class="btn" href="{% url 'deletewishlist' cart_item.Product.id %}">Remove</a></div>
+								<div style="margin-right: 10px;"><a style=" background-color:#D10024; border-radius: 5px; color:white " class="btn" href="{% url 'addtocart' cart_item.product.id %}">Add to cart</a></div>
+								<div style="flex: 1;"><a style=" background-color:#D10024; border-radius: 5px; color:white " class="btn" href="{% url 'deletewishlist' cart_item.product.id %}">Remove</a></div>
 							</div>
 		
 						{% endfor %}
