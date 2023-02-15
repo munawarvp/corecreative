@@ -50,7 +50,7 @@ Table OF Contents
 /* add on css author laser_lad */
 .navbar-nav{
   display: flex !important;
-  flex-direction: row !important;
+  flex-direction: row;
 }
 .profile {
   height: 200px;
@@ -162,7 +162,14 @@ Table OF Contents
   color: white !important;
 }
 
+@media only screen and (max-width:600px)
+{
+  .navbar-nav{
+    display: flex !important;
+    flex-direction: column;
 
+  }
+}
 /*=========================================================
 	01 -> GENERAL
 ===========================================================*/

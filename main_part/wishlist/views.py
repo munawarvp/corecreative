@@ -67,9 +67,9 @@ def deletewishlist(request,product_id):
         Wishlists.objects.get(user = user, Product= product).delete()
         return redirect('wishlist')
     else:
-        cart = Wishlist.objects.get(cart_id=_wishlist_id(request))
+        wishlist = Wishlist.objects.get(wishlist_id=_wishlist_id(request))
         product = get_object_or_404(Product, id=product_id)
-        cart_item = Wishlist_item.objects.get(product=product, cart=cart)
+        cart_item = Wishlist_item.objects.get(product=product, wishlist=wishlist)
         
         cart_item.delete()
         return redirect('wishlist')

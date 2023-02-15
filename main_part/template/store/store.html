@@ -150,6 +150,7 @@
 						<li class="active"><a href="{% url 'store' %}">Products</a></li>
 						<li><a href="{% url 'accessories' %}">Accessories</a></li>
 						<li><a href="#">About Us</a></li>
+						
 					</ul>
 					<!-- /NAV -->
 				</div>
@@ -279,15 +280,12 @@
 								<div class="product">
 									<a href="{{ product.get_url }}"><div class="product-img">
 										<img src="{{product.image.url}}" alt="">
-										<div class="product-label">
-											<span class="sale">-30%</span>
-											<span class="new">NEW</span>
-										</div>
+										
 									</div></a>
 									<div class="product-body">
 										<p class="product-category">{{product.category}}</p>
 										<h3 class="product-name"><a href="{{ product.get_url }}">{{product.product_name}}</a></h3>
-										<h4 class="product-price">{{product.price}}₹ <del class="product-old-price">$990.00</del></h4>
+										<h4 class="product-price">{{product.price}}₹ </h4>
 										<div class="product-rating">
 											<i class="fa fa-star"></i>
 											<i class="fa fa-star"></i>
@@ -296,9 +294,8 @@
 											<i class="fa fa-star"></i>
 										</div>
 										<div class="product-btns">
-											<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
-											<button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
-											<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
+											<button class="add-to-wishlist"><a href="{% url 'add_wishlist' product.id %}"><i class="fa fa-heart-o"></i></a><span class="tooltipp">add to wishlist</span></button>
+											<button class="quick-view"><a href="{{ product.get_url }}"><i class="fa fa-eye"></i></a><span class="tooltipp">quick view</span></button>
 										</div>
 									</div>
 									<div class="add-to-cart">

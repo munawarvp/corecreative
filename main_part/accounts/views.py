@@ -199,12 +199,14 @@ def resetpassword(request):
             user.set_password(password)
             user.save()
 
+            messages.success(request, 'Your password reseted..!')
             return redirect('login')
 
         else:
+            messages.error(request, 'Please enter same password..')
             return redirect('resetpassword')
 
-    return render(request, 'accounts/resetpassword.html')
+    return redirect('forgotpassword')
     
 
 @login_required(login_url='login')
