@@ -60,7 +60,8 @@
                                                     <div class="card">
                                                         
                                                         <div class="card-body">
-                                                            <form class="needs-validation" novalidate="">
+                                                            <form class="needs-validation" action="{% url 'update_order' single_order.id %}" method="POST">
+                                                                {% csrf_token %}
                                                                 <div class="row">
                                                                     <div class="col-md-10">
                                                                         <label for="firstName">Order Date</label>
@@ -74,12 +75,12 @@
                                                                 <div class="row">
                                                                     <div class="col-md-6 mb-3">
                                                                         <label for="firstName">Customer name</label>
-                                                                        <input type="text" class="form-control" id="firstName" placeholder="" value="{{single_order.user.username}}" disabled>
+                                                                        <input type="text" class="form-control" id="firstName" value="{{single_order.user.username}}" disabled>
                                                                         
                                                                     </div>
                                                                     <div class="col-md-6 mb-3">
                                                                         <label for="lastName">Order ID</label>
-                                                                        <input type="text" class="form-control" id="lastName" placeholder="" value="{{single_order.order_number}}" disabled>
+                                                                        <input type="text" class="form-control" id="lastName" value="{{single_order.order_number}}" disabled>
                                                                         
                                                                     </div>
                                                                 </div>
@@ -133,34 +134,29 @@
                                                                 </div>
                                                                 
                                                                 <div class="row">
+                                                                    <div class="col-md-3">
+                                                                        <label for="country">Payment Method</label>
+                                                                        <h5 style="color: green; margin-top: 3px;">{{single_order.payment.payment_method}}</h5>
+                                                                    </div>
                                                                     <div class="col-md-5 mb-3">
                                                                         <label for="country">Status</label>
-                                                                        <select class="form-select form-select-md mb-3" aria-label=".form-select-lg example">
-                                                                            <option selected>Open this select menu</option>
-                                                                            <option value="1">New</option>
-                                                                            <option value="2">Accepted</option>
-                                                                            <option value="3">Completed</option>
-                                                                          </select>
+                                                                        <h5 style="color: green; margin-top: 3px;">{{single_order.status}}</h5>
                                                                         
                                                                     </div>
                                                                     <div class="col-md-4 mb-3">
                                                                         <label for="state">Deliver Status</label>
-                                                                        <select class="form-select form-select-md mb-3" aria-label=".form-select-lg example">
+                                                                        <select class="form-select form-select-md mb-3" name="deliver_status" aria-label=".form-select-lg example">
                                                                             <option selected>Open this select menu</option>
-                                                                            <option value="1">Order recieved</option>
-                                                                            <option value="2">Pending</option>
-                                                                            <option value="3">Success</option>
+                                                                            <option value="New">Order recieved</option>
+                                                                            <option value="Shipped">Shipped</option>
+                                                                            <option value="Delivered">Delivered</option>
+                                                                            <option value="Cancel">Cancel</option>
                                                                           </select>
                                                                         
                                                                     </div>                                                                   
                                                                 </div>
                                                                 <hr class="mb-4">
-                                                                <div class="custom-control custom-checkbox">
-                                                                    <input type="checkbox" class="custom-control-input" id="same-address">
-                                                                    <label class="custom-control-label" for="same-address">Shipping address is the same as my billing address</label>
-                                                                </div>
                                                                 
-                                                                <hr class="mb-4">
                                                                 
                                                                 <button class="btn" style="background-color: rgb(230, 34, 74); color: white;" type="submit">Update Order</button>
                                                             </form>

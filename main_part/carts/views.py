@@ -7,6 +7,8 @@ from django.contrib.auth.decorators import login_required
 
 from django.http import HttpResponse
 
+from django.db.models import F
+
 # Create your views here.
 
 def _cart_id(request):
@@ -89,6 +91,8 @@ def carts(request):
     if request.user.is_authenticated:
         user = request.user
         cart_items = Carts.objects.filter(user=user).order_by('id')
+        
+
         total = 0
         grand_total = 0
 

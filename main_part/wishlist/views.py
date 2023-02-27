@@ -15,6 +15,7 @@ def _wishlist_id(request):
 def wishlist(request, total=0, quantity=0, wishlist_item=None):
     if request.user.is_authenticated:
         wishlist_items = Wishlists.objects.filter(user=request.user)
+        
     else:
         try:
             wishlist = Wishlist.objects.get(wishlist_id=_wishlist_id(request))
@@ -61,10 +62,11 @@ def add_wishlist(request, product_id):
         return redirect('wishlist')
 
 def deletewishlist(request,product_id):
+    
     product = Product.objects.get(id=product_id)
     if request.user.is_authenticated:
         user = request.user
-        Wishlists.objects.get(user = user, Product= product).delete()
+        Wishlists.objects.get(user = user, product= product).delete()
         return redirect('wishlist')
     else:
         wishlist = Wishlist.objects.get(wishlist_id=_wishlist_id(request))

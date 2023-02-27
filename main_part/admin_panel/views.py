@@ -192,10 +192,12 @@ def delete_product(request, prod_id):
 @login_required(login_url='login')
 def order_page(request):
 
-    orders = Order.objects.filter(is_ordered = True).all()
+    orders = Order.objects.filter(is_ordered = True).all().order_by('-created_at')
+   
 
     context = {
-        'orders': orders
+        'orders': orders,
+        
     }
     return render(request, 'admin panel/orders.html', context)
 
@@ -211,7 +213,32 @@ def order_view(request, order_id):
     return render(request, 'admin panel/order_view.html', context)
 
 
+def update_order(request, order_id):
+    order = Order.objects.get(id=order_id)
 
+    if request.method == "POST":
+        
+        if request.POST['deliver_status'] == "Shipped":
+            order.status = "Shipped"
+            order.save()
+            return redirect('order_page')
+        
+        elif request.POST['deliver_status'] == "Delivered":
+            order.status = "Delivered"
+            order.save()
+            return redirect('order_page')
+        
+        elif request.POST['deliver_status'] == "New":
+            order.status = "New"
+            order.save()
+            return redirect('order_page')
+        
+        elif request.POST['deliver_status'] == "Cancel":
+            order.status = "Canceled"
+            order.save()
+            return redirect('order_page')
+        
+    return render(request, 'admin panel/order_view.html')
 #search
 
 def search(request):

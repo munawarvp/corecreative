@@ -1,0 +1,309 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		 <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+		<title>Core Creative</title>
+		<link rel="Icon" href="{% static 'images\Black White Simple Art Studio Logo.png' %} ">
+
+ 		<!-- Google font -->
+ 		<link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
+
+ 		<!-- Bootstrap -->
+ 		<link type="text/css" rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}"/>
+
+ 		<!-- Slick -->
+ 		<link type="text/css" rel="stylesheet" href="{% static 'css/slick.css' %}"/>
+		<link type="text/css" rel="stylesheet" href="{% static 'css/slick-theme.css' %}"/>
+
+ 		<!-- nouislider -->
+ 		<link type="text/css" rel="stylesheet" href="{% static 'css/nouislider.min.css' %}"/>
+
+ 		<!-- Font Awesome Icon -->
+ 		<link rel="stylesheet" href="{% static 'css/nouislider.min.css' %}">
+
+		<script src="https://kit.fontawesome.com/6819033383.js" crossorigin="anonymous"></script>
+
+ 		<!-- Custom stlylesheet -->
+ 		<link type="text/css" rel="stylesheet" href="{% static 'css/style.css' %}"/>
+
+		
+
+        <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+        <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+        <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+        <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+        <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+        <style type="text/css">
+
+                body
+                {
+                    background:#f2f2f2;
+                }
+
+                .payment
+                {
+                    border:1px solid #f2f2f2;
+                    height:280px;
+                    border-radius:20px;
+                    background:#fff;
+                }
+            .payment_header
+            {
+                background:rgb(0, 184, 12);
+                padding:20px;
+                border-radius:20px 20px 0px 0px;
+                
+            }
+            
+            .check
+            {
+                margin:0px auto;
+                width:50px;
+                height:50px;
+                border-radius:100%;
+                background:#fff;
+                text-align:center;
+            }
+            
+            .check i
+            {
+                vertical-align:middle;
+                line-height:50px;
+                font-size:30px;
+            }
+
+                .content 
+                {
+                    text-align:center;
+                }
+
+                .content  h1
+                {
+                    font-size:25px;
+                    padding-top:25px;
+                }
+
+                .content a
+                {
+                    width:200px;
+                    height:35px;
+                    color:#fff;
+                    border-radius:30px;
+                    padding:5px 10px;
+                    background:rgb(0, 184, 12);
+                    transition:all ease-in-out 0.3s;
+                }
+
+                .content a:hover
+                {
+                    text-decoration:none;
+                    background:#000;
+                }
+
+                .invoice-title h2, .invoice-title h3 {
+                    display: inline-block;
+                }
+                
+                .table > tbody > tr > .no-line {
+                    border-top: none;
+                }
+                
+                .table > thead > tr > .no-line {
+                    border-bottom: none;
+                }
+                
+                .table > tbody > tr > .thick-line {
+                    border-top: 2px solid;
+                }
+                .ctn{
+                    margin-top: 25px;
+                    margin-bottom: 30px;
+                    background-color: rgb(61, 158, 255);
+                    height: 40px;
+                    width: 170px;
+                    
+                    text-decoration: none;
+                    border-radius: 6px;
+                }
+        
+            </style>
+
+    </head>
+	<body>
+		<!-- HEADER -->
+		<header>
+			<!-- TOP HEADER -->
+			<div id="top-header">
+				<div class="container">
+					<ul class="header-links pull-left">
+						<li><a href="#"><i class="fa fa-phone"></i>+91 7558916838</a></li>
+						<li><a href="#"><i class="fa fa-envelope-o"></i> laserlad@gmail.com</a></li>
+						<li><a href="#"><i class="fa fa-map-marker"></i> Calicut</a></li>
+					</ul>
+					<ul class="header-links pull-right">
+						<li><a href="{% url 'my_account' %}"><i class="fa fa-user-o"></i> My Account</a></li>
+					</ul>
+				</div>
+			</div>
+			<!-- /TOP HEADER -->
+
+			
+		</header>
+		<!-- /HEADER -->
+
+		
+         <div class="container" style="background-color: white; padding: 25px; border-radius: 20px; width: 90rem; margin-top: 30px;">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="invoice-title">
+                        <h2>Invoice</h2><h3 class="pull-right">Order #{{order.order_number}}</h3>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <address>
+                            <strong>Billed To:</strong><br>
+                                {{order.first_name}} {{order.last_name}}<br>
+                                {{order.address_line}}<br>
+                                {{order.city}}<br>
+                                {{order.zipcode}} {{order.country}}
+                            </address>
+                        </div>
+                        <div class="col-xs-6 text-right">
+                            <address>
+                                <strong>Billed To:</strong><br>
+                                    {{order.first_name}} {{order.last_name}}<br>
+                                    {{order.address_line}}<br>
+                                    {{order.city}}<br>
+                                    {{order.zipcode}} {{order.country}}
+                            </address>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <address>
+                                <strong>Payment Method: <p style="color: green; margin-left: 5px;">{{order.payment.payment_method}}</p></strong><br>
+                                
+                            </address>
+                        </div>
+                        <div class="col-xs-6 text-right">
+                            <address>
+                                <strong>Order Date:</strong><br>
+                                {{order.created_at}}<br><br>
+                            </address>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title"><strong>Order summary</strong></h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table class="table table-condensed">
+                                    <thead>
+                                        <tr>
+                                            <td><strong>Item</strong></td>
+                                            <td class="text-center"><strong>Price</strong></td>
+                                            <td class="text-center"><strong>Quantity</strong></td>
+                                            <td class="text-right"><strong>Totals</strong></td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for item in ordered_product %}
+                                        <tr>
+                                            <td>{{item.product.product_name}}</td>
+                                            <td class="text-center">{{item.product.price}}</td>
+                                            <td class="text-center">{{item.quantity}}</td>
+                                            <td class="text-right">{{item.product_price}}</td>
+                                        </tr>
+                                        {% endfor %}
+                                        
+                                        <tr>
+                                            <td class="thick-line"></td>
+                                            <td class="thick-line"></td>
+                                            <td class="thick-line text-center"><strong>Subtotal</strong></td>
+                                            <td class="thick-line text-right">{{subtotal}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="no-line"></td>
+                                            <td class="no-line"></td>
+                                            <td class="no-line text-center"><strong>Tax</strong></td>
+                                            <td class="no-line text-right">{{tax}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="no-line"></td>
+                                            <td class="no-line"></td>
+                                            <td class="no-line text-center"><strong>Total</strong></td>
+                                            <td class="no-line text-right">{{order.order_total}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="panel-heading" style="text-align: center; color: rgb(0, 212, 60);">
+                        <h2 class="panel-title"><strong>Thank you for doing shopping with us...</strong></h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <a href="{% url 'store' %}"><div class="container ctn">
+            <h5 style="color: white; text-align: center;">Continue Shopping</h5>
+        </div></a>
+        
+
+		
+
+		<!-- FOOTER -->
+		<footer id="footer">
+			
+
+			<!-- bottom footer -->
+			<div id="bottom-footer" class="section">
+				<div class="container">
+					<!-- row -->
+					<div class="row">
+						<div class="col-md-12 text-center">
+							<ul class="footer-payments">
+								<li><a href="#"><i class="fa fa-cc-visa"></i></a></li>
+								<li><a href="#"><i class="fa fa-credit-card"></i></a></li>
+								<li><a href="#"><i class="fa fa-cc-paypal"></i></a></li>
+								<li><a href="#"><i class="fa fa-cc-mastercard"></i></a></li>
+								<li><a href="#"><i class="fa fa-cc-discover"></i></a></li>
+								<li><a href="#"><i class="fa fa-cc-amex"></i></a></li>
+							</ul>
+							<span class="copyright">
+								 <a target="_blank" href="https://www.templateshub.net">Templates Hub</a>
+							</span>
+						</div>
+					</div>
+						<!-- /row -->
+				</div>
+				<!-- /container -->
+			</div>
+			<!-- /bottom footer -->
+		</footer>
+		<!-- /FOOTER -->
+
+
+
+		
+
+		
+
+	</body>
+</html>

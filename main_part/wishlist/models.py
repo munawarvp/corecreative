@@ -19,11 +19,11 @@ class Wishlist_item(models.Model):
     is_active = models.BooleanField(default=True)
 
     def __str__(self):
-        return self.product
+        return self.product.product_name
 
 class Wishlists(models.Model):
     user = models.ForeignKey(Account, on_delete=models.CASCADE)
-    Product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
     quantity = models.IntegerField(default=1)
 
     def __str__(self):

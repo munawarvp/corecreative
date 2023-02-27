@@ -9,6 +9,7 @@ from .forms import OrderForm
 import datetime
 import json
 
+
 # Create your views here.
 
 def place_order(request):
@@ -31,31 +32,109 @@ def place_order(request):
         if form.is_valid():
             data = Order()
             
+            payement = request.POST['payment']
+            if payement == 'cod':
+                data.user = request.user
+                data.first_name = form.cleaned_data['first_name']
+                data.last_name = form.cleaned_data['last_name']
+                data.email = form.cleaned_data['email']
+                data.address_line = form.cleaned_data['address_line']
+                data.city = form.cleaned_data['city']
+                data.country = form.cleaned_data['country']
+                data.phone = form.cleaned_data['phone']
+                data.zipcode = form.cleaned_data['zipcode']
+                data.order_total = grand_total
+                data.save()
+                #order_number has to generate
 
-            data.user = request.user
-            data.first_name = form.cleaned_data['first_name']
-            data.last_name = form.cleaned_data['last_name']
-            data.email = form.cleaned_data['email']
-            data.address_line = form.cleaned_data['address_line']
-            data.city = form.cleaned_data['city']
-            data.country = form.cleaned_data['country']
-            data.phone = form.cleaned_data['phone']
-            data.zipcode = form.cleaned_data['zipcode']
-            data.order_total = grand_total
-            data.save()
-            print('ok')
-            #order_number has to generate
+                yr = int(datetime.date.today().strftime('%Y'))
+                dt = int(datetime.date.today().strftime('%d'))
+                mt = int(datetime.date.today().strftime('%m'))
+                d = datetime.date(yr,mt,dt)
+                current_date = d.strftime("%Y%m%d")
+                order_number = current_date + str(data.id)
+                data.order_number=order_number
+                
+                payment = Payment(
+                    user = request.user,
+                    payment_id = "None",
+                    payment_method = "COD",
+                    amount_paid = grand_total,
+                    status = "None",
+                )
+                payment.save()
 
-            yr = int(datetime.date.today().strftime('%Y'))
-            dt = int(datetime.date.today().strftime('%d'))
-            mt = int(datetime.date.today().strftime('%m'))
-            d = datetime.date(yr,mt,dt)
-            current_date = d.strftime("%Y%m%d")
-            order_number = current_date + str(data.id)
-            data.order_number=order_number
-            data.save()
+                data.payment = payment
+                data.is_ordered = True
+                
+                data.save()
+                #add order product to the model from cart
+                cart_items = Carts.objects.filter(user=request.user)
 
-            order_details = Order.objects.get(user=request.user, is_ordered=False, order_number=order_number)
+                for item in cart_items:
+                    orderproduct = OrderProduct()
+                    orderproduct.order_id = data.id
+                    orderproduct.payment = payment
+                    orderproduct.user_id = request.user.id
+                    orderproduct.product_id = item.product_id
+                    orderproduct.quantity = item.quantity
+                    orderproduct.product_price = item.product.price
+                    orderproduct.ordered = True
+                    orderproduct.save()
+
+                    #reduce the quantity after placing order
+                    # ths should be inside the loop
+                    product = Product.objects.get(id=item.product_id)
+                    product.stock -= item.quantity
+                    product.save()
+                
+                #remove the cartItem with respect to that user
+                Carts.objects.filter(user=request.user).delete()
+
+                order = Order.objects.get(user=request.user, is_ordered=True, order_number=order_number)
+                ordered_product = OrderProduct.objects.filter(order_id=order.id)
+                subtotal = 0
+                tax = 0
+                for i in ordered_product:
+                    subtotal += i.product_price * i.quantity
+                tax = (5*subtotal)/100
+                
+
+                context = {
+
+                    'order': order,
+                    'ordered_product': ordered_product,
+                    'subtotal': subtotal,
+                    'tax': tax,
+                    'cart_items': cart_items,
+                    'grand_total': grand_total,
+                }
+                return render(request, 'orders/cod_ordercomplete.html', context)
+            else:
+                data.user = request.user 
+                data.first_name = form.cleaned_data['first_name']
+                data.last_name = form.cleaned_data['last_name']
+                data.email = form.cleaned_data['email']
+                data.address_line = form.cleaned_data['address_line']
+                data.city = form.cleaned_data['city']
+                data.country = form.cleaned_data['country']
+                data.phone = form.cleaned_data['phone']
+                data.zipcode = form.cleaned_data['zipcode']
+                data.order_total = grand_total
+                data.save()
+                print('ok')
+                #order_number has to generate
+
+                yr = int(datetime.date.today().strftime('%Y'))
+                dt = int(datetime.date.today().strftime('%d'))
+                mt = int(datetime.date.today().strftime('%m'))
+                d = datetime.date(yr,mt,dt)
+                current_date = d.strftime("%Y%m%d")
+                order_number = current_date + str(data.id)
+                data.order_number=order_number
+                data.save()
+
+                order_details = Order.objects.get(user=request.user, is_ordered=False, order_number=order_number)
 
             context = {
 
@@ -149,3 +228,7 @@ def order_complete(request):
     
     except(Payment.DoesNotExist, Order.DoesNotExist):
         return redirect('home')
+    
+
+def cod_ordercomplete(request):
+    return render(request, 'orders/cod_ordercomplete.html')
