@@ -32,13 +32,13 @@ def add_wishlist(request, product_id):
     product = Product.objects.get(id=product_id)
 
     if request.user.is_authenticated:
-        if Wishlists.objects.filter(Product=product_id, user=request.user).exists():
-            wishlist_item = Wishlists.objects.get(Product=product_id, user=request.user)
+        if Wishlists.objects.filter(product=product_id, user=request.user).exists():
+            wishlist_item = Wishlists.objects.get(product=product_id, user=request.user)
             wishlist_item.quantity += 1
             wishlist_item.save()
             return redirect('wishlist')
         else:
-            Wishlists.objects.create(user=request.user, Product = product)
+            Wishlists.objects.create(user=request.user, product = product)
             return redirect('wishlist')
     else:
         try:
