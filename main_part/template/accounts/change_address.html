@@ -88,17 +88,17 @@
 							<div class="header-ctn">
 								<!-- Wishlist -->
 								<div>
-									<a href="#">
+									<a href="{% url 'wishlist' %}">
 										<i class="fa fa-heart-o"></i>
 										<span>Your Wishlist</span>
-										<div class="qty">2</div>
+										<div class="qty">{{wishlist_count}}</div>
 									</a>
 								</div>
 								<!-- /Wishlist -->
 
 								<!-- Cart -->
 								<div class="dropdown">
-									<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+									<a href="{% url 'carts' %}" >
 										<i class="fa fa-shopping-cart"></i>
 										<span>Your Cart</span>
 										<div class="qty">{{cart_count}}</div>

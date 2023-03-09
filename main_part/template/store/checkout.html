@@ -90,7 +90,7 @@
 							<div class="header-ctn">
 								<!-- Wishlist -->
 								<div>
-									<a href="#">
+									<a href="{% url 'wishlist' %}">
 										<i class="fa fa-heart-o"></i>
 										<span>Your Wishlist</span>
 										<div class="qty">{{wishlist_count}}</div>
@@ -230,7 +230,7 @@
 								{% for cart_item in carts %}
 								<div class="order-col">
 									<div>{{cart_item.quantity}}x {{cart_item.product}}</div>
-									<div>${{cart_item.sub_total}}</div>
+									<div>{{cart_item.sub_total}}₹</div>
 								</div>
 								{% endfor %}
 							</div>
@@ -240,7 +240,7 @@
 							</div>
 							<div class="order-col">
 								<div><strong>TOTAL</strong></div>
-								<div><strong class="order-total">${{grand_total|floatformat:2}}</strong></div>
+								<div><strong class="order-total">{{grand_total|floatformat:2}}₹</strong></div>
 							</div>
 						</div>
 						<div class="payment-method">
@@ -273,8 +273,8 @@
 								I've read and accept the <a href="#">terms & conditions</a>
 							</label>
 						</div>
-						<button class="primary-btn order-submit" style="width: 425px;" type="submit">Place order</button>
-						<a class="primary-btn order-submit" style="width: 425px; background-color: rgb(159, 159, 159); margin-top: 10px; " href="{% url 'store' %}">Continue Shopping</a>
+						<button class="primary-btn order-submit" type="submit">Place order</button>
+						<a class="primary-btn order-submit" style="background-color: rgb(159, 159, 159); margin-top: 10px; " href="{% url 'store' %}">Continue Shopping</a>
 					</div>
 					<!-- /Order Details -->
 				</form>

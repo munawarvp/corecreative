@@ -232,3 +232,10 @@ def order_complete(request):
 
 def cod_ordercomplete(request):
     return render(request, 'orders/cod_ordercomplete.html')
+
+def cancel_order(request, order_id):
+    canceling_order = Order.objects.get(order_number=order_id)
+    canceling_order.status = 'Canceled'
+    canceling_order.save()
+    print(canceling_order.status)
+    return redirect('my_orders')

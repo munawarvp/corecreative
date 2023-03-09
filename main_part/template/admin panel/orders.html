@@ -97,6 +97,53 @@
 						       
 						    </div><!--//app-card-body-->		
 						</div><!--//app-card-->
+						
+						
+			        </div><!--//tab-pane-->
+			        
+			        <div class="tab-pane fade show active" id="orders-paid" role="tabpanel" aria-labelledby="orders-all-tab">
+					    <div class="app-card app-card-orders-table shadow-sm mb-5">
+						    <div class="app-card-body">
+							    <div class="table-responsive">
+							        <table class="table app-table-hover mb-0 text-left">
+										<thead>
+											<tr>
+												<th class="cell">Order</th>
+												
+												<th class="cell">Customer</th>
+												<th class="cell">Date</th>
+												<th class="cell">Status</th>
+												<th class="cell">Total</th>
+												<th class="cell">Payment</th>
+												<th class="cell"></th>
+											</tr>
+										</thead>
+										<tbody>
+											{% for order in orders %}
+											<tr>
+												<td class="cell">{{order.order_number}}</td>
+												
+												<td class="cell">{{order.user}}</td>
+												<td class="cell"><span>{{order.created_at.date}}</span><span class="note">{{order.created_at.time}}</span></td>
+												<td class="cell"><span class="paym"
+													{% if order.status == 'New' %} style="background-color: #2DCCFF;"
+													{% elif order.status == 'Shipped' %} style="background-color: #d8c300;"
+													
+													{% elif order.status == 'Delivered' %} style="background-color: #12b300;"
+													{% else %} style="background-color: crimson;"
+													{% endif %}
+													>{{order.status}}</span></td>
+												<td class="cell">{{order.order_total}}</td>
+												<td class="cell"><span class="paym" {% if order.payment.payment_method == 'COD' %} style="background-color: #d9534f;" {% endif %}>{{order.payment.payment_method}}</span></td>
+												<td class="cell"><a class="btn-sm app-btn-secondary" href="{% url 'order_view' order.id %}">View</a></td>
+											</tr>
+											{% endfor %}
+										</tbody>
+									</table>
+						        </div><!--//table-responsive-->
+						       
+						    </div><!--//app-card-body-->		
+						</div><!--//app-card-->
 						<nav class="app-pagination">
 							<ul class="pagination justify-content-center">
 								<li class="page-item disabled">
@@ -112,8 +159,6 @@
 						</nav><!--//app-pagination-->
 						
 			        </div><!--//tab-pane-->
-			        
-			        
 			        
 			        
 			        

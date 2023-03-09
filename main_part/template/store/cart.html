@@ -188,9 +188,9 @@
 					<div class="box-element">
 						<div class="cart-row">
 							<div style="flex: 2;"></div>
-							<div style="flex: 2;"><strong>Items</strong></div>
-							<div style="flex: 1;"><strong>Quantity</strong></div>
-							<div style="flex: 1;"><strong>Price</strong></div>
+							<div style="flex: 2;" class="make-cart-small"><strong>Items</strong></div>
+							<div style="flex: 1;" class="make-cart-small"><strong>Quantity</strong></div>
+							<div style="flex: 1;" class="make-cart-small"><strong>Price</strong></div>
 							
 							<div style="flex: 1;"><strong>Action</strong></div>
 						</div>
@@ -199,7 +199,7 @@
 		
 						<div class="cart-row">
 							<div style="flex: 2;"><img class="row-image" src="{{ cart_item.product.image.url }}" alt=""></div>
-							<div style="flex: 2;"><h5>{{cart_item.product.product_name}}</h5></div>
+							<div style="flex: 2;"><p class="make-cart-small"><b>{{cart_item.product.product_name}}</b></p></div>
 							<div style="flex: 1;">
 								<p class="quantity">{{cart_item.quantity}}</p>
 								<div class="quantity">
@@ -208,9 +208,9 @@
 									<a href="{% url 'removefromcart' cart_item.product.id %}"><img class="chg-quantity update-cart" src="{% static 'images/arrow-down.png'%}" alt=""></a>
 								</div>
 							</div>
-							<div style="flex: 1;">{{cart_item.sub_total|floatformat:2}}₹</div>
+							<div style="flex: 1;"><p class="make-cart-small">{{cart_item.sub_total|floatformat:2}}₹</p></div>
 							
-							<div style="flex: 1;"><a style=" background-color:#D10024; border-radius: 5px; color:white " class="btn" href="{% url 'deletecartitem' cart_item.product.id %}">Remove</a></div>
+							<div style="flex: 1;"><a style="border-radius: 5px;" class="btn remove" href="{% url 'deletecartitem' cart_item.product.id %}">Remove</a></div>
 						</div>
 		
 						{% endfor %}
@@ -224,12 +224,12 @@
 		
 						<table class="table">
 							<tr>
-								<th><h5>Items: <strong>{{cart_count}}</strong></h5></th>
-								<th><h5>Total: <strong>{{total|floatformat:2}}₹</strong></h5></th>
-								<th><h5>TAX: <strong>{{tax|floatformat:2}}₹</strong></h5></th>
-								<th><h5>Grand Total: <strong>{{grand_total|floatformat:2}}₹</strong></h5></th>
+								<th class="make-small"><p>Items: <strong>{{cart_count}}</strong></p></th>
+								<th class="make-small"><p>Total: <strong>{{total|floatformat:2}}₹</strong></p></th>
+								<th class="make-small"><p>TAX: <strong>{{tax|floatformat:2}}₹</strong></p></th>
+								<th class="make-small"><p>Grand Total: <strong>{{grand_total|floatformat:2}}₹</strong></p></th>
 									
-								<th><a style="float: right; margin: 5px; background-color:#D10024; border-radius: 5px; color:white " class="btn" href="{% url 'checkout' %}">Checkout</a></th>
+								<th><a style="border-radius: 4px;" class="btn res-check" href="{% url 'checkout' %}">Checkout</a></th>
 							</tr>
 							
 						</table>

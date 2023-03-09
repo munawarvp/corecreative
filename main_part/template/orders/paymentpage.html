@@ -97,10 +97,10 @@
 							<div class="header-ctn">
 								<!-- Wishlist -->
 								<div>
-									<a href="#">
+									<a href="{% url 'wishlist' %}">
 										<i class="fa fa-heart-o"></i>
 										<span>Your Wishlist</span>
-										<div class="qty">2</div>
+										<div class="qty">{{wishlist_count}}</div>
 									</a>
 								</div>
 								<!-- /Wishlist -->
@@ -239,7 +239,7 @@
 						<div class="order-summary">
 							<div class="order-col">
 								<div><strong>TOTAL</strong></div>
-								<div><strong class="order-total">${{grand_total|floatformat:2}}</strong></div>
+								<div><strong class="order-total">{{grand_total|floatformat:2}}₹</strong></div>
 							</div>
 						</div>
 						

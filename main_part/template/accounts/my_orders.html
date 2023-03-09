@@ -178,7 +178,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-md-3">
-					<div class="card" style="border: solid 1px rgba(172, 172, 172, 0.5); padding: 10px 20px; box-shadow: 0 0 5px 5px #24263837; margin-bottom: 30px;">
+					<div class="card" style="border: solid 1px rgba(172, 172, 172, 0.5); padding: 10px 20px; box-shadow: 0 0 5px 5px #24263837; margin-bottom: 20px;">
 						<div style="display: flex; justify-content: center;">
 							<img class="card-img-top " style="width: 150px;" src="{{userprofile.profile_picture.url}}" alt="Card image cap">
 
@@ -205,9 +205,9 @@
 							  <tr>
 								<th scope="col">Order No</th>
 								<th scope="col">Billing Name</th>
-								<th scope="col">Phone</th>
-								<th scope="col">Order Total</th>
-								<th scope="col">Date</th>
+								<th scope="col" class="for-hide">Phone</th>
+								<th scope="col" class="for-hide">Order Total</th>
+								<th scope="col" class="for-hide">Date</th>
 								<th scope="col"></th>
 							  </tr>
 							</thead>
@@ -216,9 +216,9 @@
 								<tr>
 									<td><h5>{{order.order_number}}</h5></td>
 									<td><h5>{{order.first_name}} {{order.last_name}}</h5></td>
-									<td><h5>{{order.phone}}</h5></td>
-									<td><h5>{{order.order_total}}</h5></td>
-									<td><h5>{{order.created_at}}</h5></td>
+									<td class="for-hide"><h5>{{order.phone}}</h5></td>
+									<td class="for-hide"><h5>{{order.order_total}}</h5></td>
+									<td class="for-hide"><h5>{{order.created_at}}</h5></td>
 									<td><a class="view-order" href="{% url 'single_order' order.order_number %}">View</a></td>
 							  </tr>
 							{% endfor %}  

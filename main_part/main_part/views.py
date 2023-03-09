@@ -1,10 +1,17 @@
 from django.shortcuts import render,redirect
+from django.http import JsonResponse
 from store.models import Product
 from category.models import Category
 from django.db.models import Q
 
 
 def home(request):
+    if 'term' in request.GET:
+        qs = Product.objects.filter(product_name__icontains=request.GET.get('term'))
+        products = list()
+        for product in qs:
+            products.append(product.product_name)
+        return JsonResponse(products, safe=False)
     accessory = Category.objects.get(category_name = 'Accessories')
     products = Product.objects.filter(is_available=True).exclude(category=accessory)
     accessories = Product.objects.filter(category = accessory)
