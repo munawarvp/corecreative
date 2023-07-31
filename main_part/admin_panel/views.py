@@ -135,17 +135,7 @@ def add_product(request):
                 description = request.POST['description'],
                 image = request.FILES['product_image']
             )
-            # values = Product(
-            #     product_name = request.POST['product_name'],
-            #     slug = request.POST['slug'],
-            #     price = request.POST['price'],
-            #     stock = request.POST['stock'],
-            #     category = Category.objects.get(id=category_id),
-                
-            #     description = request.POST['description'],
-            #     image = request.FILES['product_image']
-            # )
-            # values.save()
+            
             return redirect('product_page')
 
     context = {

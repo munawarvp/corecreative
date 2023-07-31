@@ -11,8 +11,6 @@ from django.utils.encoding import force_bytes
 from django.contrib.auth.tokens import default_token_generator
 from django.core.mail import EmailMessage
 
-from category.models import Category
-from store.models import Product
 from orders.models import Order, OrderProduct
 
 
@@ -71,7 +69,6 @@ def login(request):
         password = request.POST['password']
 
         user = auth.authenticate(email = email, password=password)
-        # print(user)
         if user is not None:
             if user.is_admin:
                 auth.login(request, user)

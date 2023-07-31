@@ -18,5 +18,4 @@ urlpatterns = [
     path('change_address/', views.change_address, name='change_address'),
 
     
-    # path('unblock/<int:user_id>/', views.unblock, name='unblock'),
 ]
